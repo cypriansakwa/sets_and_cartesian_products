@@ -41,3 +41,14 @@ A × B has 9 pairs
 Sample of A × B: [(0, 2), (0, 3), (0, 4), (1, 2), (1, 3)]
 
 ```
+## 🧮 Mathematical Background
+
+This program mirrors fundamental set operations:
+| Mathematical Concept | Operation Name        | Symbol / Example   |
+| -------------------- | --------------------- | ------------------ |
+| Union                | `set_union()`         | ( A \cup B )       |
+| Intersection         | `set_intersection()`  | ( A \cap B )       |
+| Difference           | `set_difference()`    | ( A \setminus B )  |
+| Power Set            | `power_set()`         | ( \mathcal{P}(A) ) |
+| Cartesian Product    | `cartesian_product()` | ( A \times B )     |
+
