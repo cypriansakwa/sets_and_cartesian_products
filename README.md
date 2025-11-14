@@ -52,3 +52,104 @@ This program mirrors fundamental set operations:
 | Power Set            | `power_set()`         | ( \mathcal{P}(A) ) |
 | Cartesian Product    | `cartesian_product()` | ( A \times B )     |
 
+These operations mirror how STARKs manipulate evaluation domains for polynomials.
+
+## 🚀 Running the Code
+1. Clone the repository
+   ```bash
+    git clone https://github.com/cypriansakwa/sets_and_cartesian_products.git
+    cd sets_and_cartesian_products
+
+   ```
+2. Build and run
+   ```bash
+    cargo run
+   ```
+## 📦 Dependencies
+
+This project uses:
+```toml
+ ark-std = "0.5.0"
+ark-ff = "0.5.0"
+ark-bn254 = "0.5.0"
+```
+Ensure you have the latest stable Rust toolchain.
+## 🔧 How It Works
+Each operation is implemented as a pure Rust function:
+- **Union** uses a `BTreeSet` to maintain uniqueness
+- **Intersection** filters elements present in both sets
+- **Difference** removes elements of B from A
+- **Power Set** is generated using bitmasks
+- **Cartesian Product** is built via nested iterators
+
+All operations are compatible with Arkworks field elements.
+
+## 📘 Educational Note (STARKs Context)
+In STARK proof systems:
+ - Evaluation domains are sets of field elements.
+ - Union, intersection, and products create the polynomial domains.
+ - Cartesian products define multivariate polynomial domains.
+ - Power sets appear in combinatorial constraint constructions.
+
+Thus, learning these set operations is foundational for understanding modern ZK proofs.
+
+## Diagram: How Sets Map to STARK Evaluation Domains
+```less
+                   +---------------------------+
+                  |        A Set A           |
+                  |  {a₀, a₁, a₂, ...}       |
+                  +-------------+-------------+
+                                |
+                                |  Elements of a field (e.g., Fr)
+                                v
+                  +---------------------------+
+                  |  Evaluation Domain D_A    |
+                  |  Points where trace       |
+                  |  polynomials are sampled  |
+                  +-------------+-------------+
+
+         +------------------+        +------------------+
+         |      Set A       |        |      Set B       |
+         | {a₀, a₁, a₂}     |        | {b₀, b₁, b₂}     |
+         +---------+--------+        +---------+--------+
+                   |                           |
+                   | union/intersection/etc    |
+                   v                           v
+           +---------------+          +---------------------+
+           | Combined or   |          |  Restricted or      |
+           | Derived Set   |          |  Filtered Domain    |
+           +-------+-------+          +----------+----------+
+                   |                             |
+                   +-------------+---------------+
+                                 |
+                                 v
+                     +-------------------------+
+                     |   Evaluation Domain D   |
+                     | for constraint polynomials
+                     |   in IOPs / FRI / AIR   |
+                     +-------------------------+
+
+```
+**Interpretation**
+**Set A or B**
+
+Simple sets of field elements:
+ - {0, 1, 2}
+ - {2, 3, 4}
+
+**Evaluation Domain**
+A set of points where polynomials are:
+ - evaluated,
+ - queried by the verifier,
+ - folded during FRI.
+Operations correspond to STARK concepts
+
+**Operations correspond to STARK concepts**
+| Set Operation         | Role in STARKs                                         |
+| --------------------- | ------------------------------------------------------ |
+| **Union**             | Combine domains for multiple constraints               |
+| **Intersection**      | Identify shared evaluation points                      |
+| **Difference**        | Exclude restricted points (e.g., boundary constraints) |
+| **Power set**         | Model combinatorial constraint structures              |
+| **Cartesian product** | Build multivariate domains (e.g., 2D traces)           |
+
